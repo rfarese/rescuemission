@@ -8,14 +8,17 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new 
+    @question = Question.new
   end
 
   def create
     @question = Question.new(question_params)
 
-    @question.save
-    redirect_to @question
+    if @question.save
+      redirect_to @question
+    else
+      render 'new'
+    end 
   end
 
   private
