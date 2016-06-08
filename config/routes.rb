@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  resources :questions 
+  get '/auth/:provider/callback', to: 'sessions#create'
+  
+  resources :questions
 end
