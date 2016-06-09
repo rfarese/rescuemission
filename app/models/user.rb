@@ -2,19 +2,6 @@ class User < ActiveRecord::Base
   has_many :questions
   has_many :answers
 
-  # def self.find_or_create_from_omniauth(auth)
-  #   provider = auth.provider
-  #   uid = auth.uid
-  #
-  #   find_or_create_by(provider: provider, uid: uid) do |user|
-  #     user.provider = provider
-  #     user.uid = uid
-  #     user.
-  #   end
-  # end
-
-  # this is the autho code from the gorails tutorial...
-
   def self.find_or_create_from_auth_hash(auth_hash)
     user = where(provider: auth_hash.provider, uid: auth_hash.uid).first_or_create
     user.update(
