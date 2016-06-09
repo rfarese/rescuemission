@@ -6,8 +6,6 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
   end
-<<<<<<< HEAD
-=======
 
   def new
     @question = Question.new
@@ -33,5 +31,4 @@ class QuestionsController < ApplicationController
 
       params.require(:question).permit(:title, :description)
     end
->>>>>>> post_a_question
 end
