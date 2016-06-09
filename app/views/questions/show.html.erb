@@ -1,6 +1,7 @@
 <h1><%= @question.title %></h1>
 
 <p><%= @question.description %></p>
+<%= link_to 'Edit Question', edit_question_path(@question) %>
 
 <h2>Answers</h2>
   <ul>

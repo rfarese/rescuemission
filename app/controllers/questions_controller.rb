@@ -11,6 +11,10 @@ class QuestionsController < ApplicationController
     @question = Question.new
   end
 
+  def edit
+    @question = Question.find(params[:id])
+  end
+
   def create
     if session[:user_id] == nil
       flash[:notice] = "You must be signed in to create a new question"
@@ -29,10 +33,25 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def update
+    if session[:user_id] == nil
+      flash[:notice] = "You must be signed in to edit a question"
+    end
+
+    @question = Question.find(params[:id])
+
+    title = question_params[:title]
+    description = question_params[:description]
+
+    if @question.update(question_params)
+      redirect_to @question
+    else
+      render 'edit'
+    end
+  end
+
   private
     def question_params
-      user_id = session[:user_id]
-
       params.require(:question).permit(:title, :description)
     end
 end
