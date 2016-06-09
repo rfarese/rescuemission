@@ -2,6 +2,13 @@
 
 <p><%= @question.description %></p>
 
+<h2>Answers</h2>
+  <ul>
+    <% @question.answers.each do |answer| %>
+      <li><%= answer.description %></li>
+    <% end %>
+  </ul>
+
 <h2>Add an Answer:</h2>
 <%= form_for([@question, @question.answers.build]) do |f| %>
   <p>
