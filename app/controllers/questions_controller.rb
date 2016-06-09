@@ -6,4 +6,32 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
   end
+<<<<<<< HEAD
+=======
+
+  def new
+    @question = Question.new
+  end
+
+  def create
+    user_id = session[:user_id]
+    title = question_params[:title]
+    description = question_params[:description]
+
+    @question = Question.create(user_id: user_id, title: title, description: description)
+
+    if @question.save
+      redirect_to @question
+    else
+      render 'new'
+    end
+  end
+
+  private
+    def question_params
+      user_id = session[:user_id]
+
+      params.require(:question).permit(:title, :description)
+    end
+>>>>>>> post_a_question
 end
