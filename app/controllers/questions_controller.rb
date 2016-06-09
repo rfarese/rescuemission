@@ -12,6 +12,10 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    if session[:user_id] == nil
+      flash[:notice] = "You must be signed in to create a new question"
+    end
+
     user_id = session[:user_id]
     title = question_params[:title]
     description = question_params[:description]
