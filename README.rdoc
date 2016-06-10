@@ -26,3 +26,25 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+
+Notes on completing this project:
+
+ here is a completed version of the project - https://github.com/LmKupke/rescue_mission
+
+[1] Configure your testing environment. Here are some links to help:
+  - http://www.railsonmaui.com/tips/rails/capybara-phantomjs-poltergeist-rspec-rails-tips.html
+  - http://railscasts.com/episodes/257-request-specs-and-capybara?autoplay=true
+  - http://radavis.github.io/2015/04/08/how-to-run-javascript-in-your-rails-test-suite.html
+  - also, search in launch academy...lots of good questions in there
+  - remember we are using rspec, capybara, poltergeist (capybara & phantomjs), and database_cleaner...
+  - we have to configure omniauth authentication to work properly in the test environment...
+    - see how it is done in these two examples
+      - https://learn.launchacademy.com/teams/online-intensive-1/curricula/online-intensive/submissions/27828
+      -
+[2] Write tests for all user stories...
+  - write tests for all major sections...but most importantly features
+  - here are a few good site that give examples of tests based on rails models, controllers, routes, etc.
+    - https://www.relishapp.com/rspec/rspec-rails/v/3-4/docs/model-specs
+    - https://learn.launchacademy.com/lessons/acceptance-testing
+[3] Continue with user stories...
