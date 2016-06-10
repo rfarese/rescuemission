@@ -9,7 +9,7 @@ RSpec.configure do |config|
     OmniAuth.config.mock_auth[:twitter] = nill
   end
   OmniAuth.config.test_mode = true
-  config.include AuthenticationHelper 
+  config.include AuthenticationHelper
 
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
