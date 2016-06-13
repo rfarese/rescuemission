@@ -1,18 +1,6 @@
-require_relative '../spec_helper'
+require 'rails_helper'
 
-feature "View all questions", :type => :feature do
-
-  def create_user
-    User.create(
-      provider: "Provider1",
-      uid: "uid1",
-      name: "bobby",
-      token: "1234",
-      secret: "abigsecret",
-      profile_image: "https://avatars2.githubusercontent.com/u/174825?v=3&s=400"
-    )
-  end
-
+feature "View all questions" do
   def create_questions
     Question.create(user_id: 1,
                     title: "What is the proper way to cook Chicken breasts?",
@@ -29,11 +17,9 @@ feature "View all questions", :type => :feature do
     create_questions
     visit "/"
 
-    expect(page).to have_content "Should not pass"
-    expect(page).to have_content "Should certainly not pass"
-    expect(page).to have_content "Should really certainly not pass"
+    expect(page).to have_content "What is the proper way to cook Chicken breasts?"
+    expect(page).to have_content "What is the best way for me to get to Thomas Land?"
+    expect(page).to have_content "How do I get my older brother to stop taking all my toys all the time?"
+    expect(page).to have_selector("ul li:nth-child(1)", text: "What is the proper way to cook Chicken breasts?")
   end
 end
-#
-# - I must see the title of each question
-# - I must see questions listed in order, most recently posted first
