@@ -37,6 +37,10 @@ gem 'dotenv-rails'
 # use omniauth for user authentication
 gem 'omniauth-twitter'
 
+gem 'redcarpet'
+gem 'rouge'
+gem 'sanitize'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -44,8 +48,6 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'poltergeist'
-  gem 'factory_girl'
 end
 
 group :development do
