@@ -1,6 +1,6 @@
-<h1><%= use_markdown(@question.title) %></h1>
+<h1><%= @question.title %></h1>
 
-<p><%= use_markdown(@question.description) %></p>
+<p id="question_description"><%= use_markdown(@question.description) %></p>
 <%= link_to 'Edit Question', edit_question_path(@question) %><br>
 <%= link_to 'Delete Question', question_path(@question), method: :delete %>
 
