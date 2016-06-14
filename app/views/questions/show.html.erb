@@ -1,13 +1,13 @@
-<h1><%= @question.title %></h1>
+<h1><%= use_markdown(@question.title) %></h1>
 
-<p><%= @question.description %></p>
+<p><%= use_markdown(@question.description) %></p>
 <%= link_to 'Edit Question', edit_question_path(@question) %><br>
 <%= link_to 'Delete Question', question_path(@question), method: :delete %>
 
 <h2>Answers</h2>
   <ul>
     <% @question.answers.each do |answer| %>
-      <li><%= answer.description %></li>
+      <li><%= use_markdown(answer.description) %></li>
     <% end %>
   </ul>
 
