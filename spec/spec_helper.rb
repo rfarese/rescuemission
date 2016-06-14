@@ -1,6 +1,7 @@
 require 'capybara/rspec'
 require_relative 'support/authentication_helper'
 require_relative 'support/database_cleaner'
+require 'omniauth'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
