@@ -54,6 +54,15 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    @question = Question.find(params[:id])
+    @question.destroy
+    answers = Answer.where(question_id: @question.id)
+    answers.delete_all
+
+    redirect_to questions_path
+  end
+
   private
     def question_params
       params.require(:question).permit(:title, :description)
