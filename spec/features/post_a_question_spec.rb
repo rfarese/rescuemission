@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-feature "View a questions details" do
-
-  def create_user
+feature "A user creates a new question" do
+  let(:user) do
     User.create(
       provider: "Provider1",
       uid: "uid1",
@@ -13,24 +12,71 @@ feature "View a questions details" do
     )
   end
 
-  def create_questions
-    Question.create(user_id: 1,
-                    title: "What is the proper way to cook Chicken breasts?",
-                    description: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
-    Question.create(user_id: 2,
-                    title: "What is the best way for me to get to Thomas Land?",
-                    description: "Trying to get to Thomas Land when you are only 3 yrs old can be tough.  Should I ask my parents to drive me?  Or perhaps my grandpa?  Am I too hung to try and hitch hike there?")
-    Question.create(user_id: 3,
-                    title: "How do I get my older brother to stop taking all my toys all the time?",
-                    description: "Because I am not even 2 yrs old yet, my older brother is a lot stronger than I am and is always taking my toys.  Is there any way I can stop his seeminly unstoppable toy confiscating abilities?")
+  def sign_in_and_go_to_new_question_page
+    visit "/"
+    sign_in_as user
+    click_link "Create a New Question"
   end
 
-  scenario "User views the title of each question" do
-    create_questions
+  scenario "User navigates to new questions page" do
     visit "/"
-    click_link("What is the proper way to cook Chicken breasts?")
+    click_link "Create a New Question"
 
-    expect(page).to have_content "What is the proper way to cook Chicken breasts?"
-    expect(page).to have_content "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not."
+    expect(page).to have_content "Title"
+    expect(page).to have_content "Description"
+  end
+
+  scenario "User successfully creates a new question" do
+    sign_in_and_go_to_new_question_page
+
+    fill_in("Title", with: "What is the proper way to cook Chicken breasts?")
+    fill_in("Description", with: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
+    click_button("Save Question")
+
+    expect(page).to have_content "You Successfully Created Your New Question!"
+  end
+
+  scenario "User is not signed in and tries creates a new question" do
+    visit "/"
+    click_link "Create a New Question"
+    fill_in("Title", with: "What is the proper way to cook Chicken breasts?")
+    fill_in("Description", with: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
+    click_button("Save Question")
+
+    expect(page).to have_content "You must be signed in to create a new question"
+  end
+
+  scenario "User is signed in but provides a title that is too short" do
+    sign_in_and_go_to_new_question_page
+
+    fill_in("Title", with: "What is a chicken?")
+    fill_in("Description", with: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
+    click_button("Save Question")
+
+    expect(page).to have_content "1 error stopped this question from being saved:"
+    expect(page).to have_content "Title is too short (minimum is 40 characters)"
+  end
+
+  scenario "User is signed in but provides a description that is too short" do
+    sign_in_and_go_to_new_question_page
+
+    fill_in("Title", with: "What is the proper way to cook Chicken breasts?")
+    fill_in("Description", with: "Should I use any spices?")
+    click_button("Save Question")
+
+    expect(page).to have_content "1 error stopped this question from being saved:"
+    expect(page).to have_content "Description is too short (minimum is 150 characters)"
+  end
+
+  scenario "User is signed in but provides a description and a title that is too short" do
+    sign_in_and_go_to_new_question_page
+
+    fill_in("Title", with: "What is a chicken?")
+    fill_in("Description", with: "Should I use any spices?")
+    click_button("Save Question")
+
+    expect(page).to have_content "2 errors stopped this question from being saved:"
+    expect(page).to have_content "Title is too short (minimum is 40 characters)"
+    expect(page).to have_content "Description is too short (minimum is 150 characters)"
   end
 end
