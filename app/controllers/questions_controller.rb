@@ -38,19 +38,20 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if session[:user_id] == nil
-      flash[:notice] = "You must be signed in to edit a question"
-    end
-
     @question = Question.find(params[:id])
 
-    title = question_params[:title]
-    description = question_params[:description]
-
-    if @question.update(question_params)
-      redirect_to @question
+    if session[:user_id] == nil
+      flash[:notice] = "You must be signed in to edit a question"
+      redirect_to edit_question_path(params[:id])
+    elsif session[:user_id] != @question.user_id
+      flash[:notice] = "You can only edit your own questions."
+      redirect_to edit_question_path(params[:id])
     else
-      render 'edit'
+      if @question.update(question_params)
+        redirect_to @question
+      else
+        render 'edit'
+      end
     end
   end
 
