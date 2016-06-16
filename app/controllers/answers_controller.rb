@@ -16,6 +16,32 @@ class AnswersController < ApplicationController
     redirect_to question_path(question_id)
   end
 
+  def change_current_best_answer(question_id)
+    if Answer.where(question_id: question_id, best_answer: true)
+      answers = Answer.where(question_id: question_id, best_answer: true)
+
+      answers.each do |answer|
+        answer.best_answer = false
+        answer.save
+      end
+    end
+  end
+
+  def update
+    @question = Question.find(params[:question_id])
+    change_current_best_answer(params[:question_id])
+
+    answer_id = params[:id]
+    answer = Answer.where(id: answer_id).first
+    answer.best_answer = true
+
+    if answer.save
+      redirect_to @question
+    else
+      render 'edit'
+    end
+  end
+
   def destroy
     @question = Question.find(params[:question_id])
     @answer = @question.answers.find(params[:id])
