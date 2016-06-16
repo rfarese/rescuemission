@@ -33,6 +33,7 @@ feature "View all questions" do
     navigate_to_question_details_page
 
     expect(page).to have_content "Best Answer"
+    expect(page).to have_content "Set New Best Answer"
   end
 
   scenario "User can choose which answer is the best answer" do
