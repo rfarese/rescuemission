@@ -5,6 +5,13 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 
+  def sign_out
+    session[:user_id] = nil
+    flash[:notice] = "You have been signed out."
+
+    redirect_to root_path
+  end
+
   protected
 
   def auth_hash
