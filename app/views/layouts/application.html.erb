@@ -8,9 +8,14 @@
 </head>
 <body>
 
-  <% if current_user %>
-    <p>Signed in as <%= current_user.name %></p>
-  <% end %>
+  <ul class="top-bar-section">
+    <% if current_user %>
+      <li>Signed in as <%= current_user.name %></li>
+      <li><%= link_to "Sign Out", '/sign_out' %></li>
+    <% else %>
+    <li><%= link_to "Sign In", '/auth/twitter' %></li>
+    <% end %>
+  </ul>
 
   <% if flash.any? %>
     <p><%= flash[:notice]%></p>
