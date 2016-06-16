@@ -5,16 +5,25 @@
 <%= link_to 'Delete Question', question_path(@question), method: :delete %>
 
 <h2>Answers</h2>
+
+<% if Answer.where(question_id: @question.id, best_answer: true).first %>
+  <h3>Best Answer</h3>
+  <% best_answer = Answer.where(question_id: @question.id, best_answer: true).first %>
+    <p class="best-answer"><%= best_answer.description %></p>
+<% end %>
+
   <table>
     <tr>
-      <th>Best Answer</th>
+      <th>Set New Best Answer</th>
       <th>Answer</th>
     </tr>
     <% @question.answers.each do |answer| %>
-    <tr>
-      <td>Is best answer?</td>
-      <td><%= use_markdown(answer.description) %></td>
-    </tr>
+      <% unless answer.best_answer == true %>
+        <tr>
+          <td><%= link_to "Best Answer", "/questions/#{answer.question_id}/answers/#{answer.id}", method: :patch %></td>
+          <td><%= use_markdown(answer.description) %></td>
+        </tr>
+      <% end %>
     <% end %>
   </table>
 
