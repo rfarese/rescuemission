@@ -2,17 +2,6 @@ require 'rails_helper'
 
 feature "View a questions details" do
 
-  # def create_user
-  #   User.create(
-  #     provider: "Provider1",
-  #     uid: "uid1",
-  #     name: "bobby",
-  #     token: "1234",
-  #     secret: "abigsecret",
-  #     profile_image: "https://avatars2.githubusercontent.com/u/174825?v=3&s=400"
-  #   )
-  # end
-
   def create_questions
     Question.create(user_id: 1,
                     title: "What is the proper way to cook Chicken breasts?",
