@@ -10,7 +10,7 @@ module AuthenticationHelper
     { :provider => user.provider,
       :uid => user.uid,
       :info => {
-        :nickname => "",
+        :nickname => user.name,
         :name => user.name,
         :location => "Anytown, USA",
         :image => user.profile_image,
@@ -21,8 +21,8 @@ module AuthenticationHelper
         }
       },
       :credentials => {
-        :token => "1234",
-        :secret => "abcdef1234"
+        :token => user.token,
+        :secret => user.secret
       },
       :extra => {
         :access_token => "", # An OAuth::AccessToken object
