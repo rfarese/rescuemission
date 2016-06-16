@@ -5,11 +5,18 @@
 <%= link_to 'Delete Question', question_path(@question), method: :delete %>
 
 <h2>Answers</h2>
-  <ul>
+  <table>
+    <tr>
+      <th>Best Answer</th>
+      <th>Answer</th>
+    </tr>
     <% @question.answers.each do |answer| %>
-      <li><%= use_markdown(answer.description) %></li>
+    <tr>
+      <td>Is best answer?</td>
+      <td><%= use_markdown(answer.description) %></td>
+    </tr>
     <% end %>
-  </ul>
+  </table>
 
 <h2>Add an Answer:</h2>
 <%= form_for([@question, @question.answers.build]) do |f| %>
