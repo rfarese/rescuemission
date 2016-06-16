@@ -25,8 +25,6 @@ feature "View all questions" do
     create_answers
     visit "/"
     click_link("What is the proper way to cook Chicken breasts?")
-
-    # need to add some kind of test here to find the right button...will need to create a button with an ID that matches the answer id
   end
 
   scenario "User views the best answer on the questions detail page" do
