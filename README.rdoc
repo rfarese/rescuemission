@@ -47,4 +47,13 @@ Notes on completing this project:
   - here are a few good site that give examples of tests based on rails models, controllers, routes, etc.
     - https://www.relishapp.com/rspec/rspec-rails/v/3-4/docs/model-specs
     - https://learn.launchacademy.com/lessons/acceptance-testing
-[3] Continue with user stories...
+[3] Choosing an Answer (User Story)
+  - search google with "mark answer as favorite answer in rails"; there are lots of useful ideas about how to do this
+  - looking at using a radio button to choose the best answer
+  - might have to use a Rails form to implement this instead of having to use javascript
+  - read this post http://stackoverflow.com/questions/13240109/implement-add-to-favorites-in-rails-3-4
+    - it looks like you may have to rethink the way you have the relationships setup with question, answer, and best answer...
+    - map out how you want these set up in the database...
+    - based on the stackoverflow post above, you maybe able to create a button choose the best answer...
+  - NEW STRATEGY
+    - just add a 'best_answer' column set to true or false in the answers table 
