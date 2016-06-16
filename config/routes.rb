@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'sessions#create'
 
   resources :questions do
-    resources :answers, only: [:create, :destroy]
+    resources :answers, only: [:create, :destroy, :update]
   end
 end
