@@ -1,13 +1,12 @@
 class AnswersController < ApplicationController
   def create
-    user_id = session[:user_id]
     question_id = params[:question_id]
     @question = Question.find(question_id)
 
-    if session[:user_id] == nil
+    if !current_user
       flash[:notice] = "You must be signed in to create a new question"
     else
-      @answer = @question.answers.create(question_id: question_id, user_id: user_id, description: answer_params["description"])
+      @answer = @question.answers.create(question_id: question_id, user_id: current_user.id, description: answer_params["description"])
       if !@answer.valid?
         flash[:notice] = "An Answer must be atleast 50 characters long.  Try again."
       end
@@ -30,10 +29,10 @@ class AnswersController < ApplicationController
   def update
     @question = Question.find(params[:question_id])
 
-    if session[:user_id] == nil
+    if !current_user
       flash[:notice] = "You must be signed in to choose a best answer."
       redirect_to @question
-    elsif session[:user_id] != @question.user_id
+    elsif current_user.id != @question.user_id
       flash[:notice] = "You can only choose a best answer for questions you've created."
       redirect_to @question
     else
