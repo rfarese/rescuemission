@@ -1,6 +1,7 @@
 require 'capybara/rspec'
 require_relative 'support/authentication_helper'
 require_relative 'support/database_cleaner'
+require_relative 'support/let_user_helper'
 require 'omniauth'
 
 RSpec.configure do |config|
@@ -18,4 +19,5 @@ RSpec.configure do |config|
 
   OmniAuth.config.test_mode = true
   config.include AuthenticationHelper
+  config.include LetUserHelper
 end

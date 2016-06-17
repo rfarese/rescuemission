@@ -2,14 +2,7 @@ require 'rails_helper'
 
 feature "User can choose a best answer" do
   let(:user) do
-    User.create(
-      provider: "Provider1",
-      uid: "uid1",
-      name: "bobby",
-      token: "1234",
-      secret: "abigsecret",
-      profile_image: "https://avatars2.githubusercontent.com/u/174825?v=3&s=400"
-    )
+    create_current_user
   end
 
   def create_questions

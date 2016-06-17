@@ -2,14 +2,7 @@ require 'rails_helper'
 
 feature "Prevent Users from editing other users questions" do
   let(:user) do
-    User.create(
-      provider: "Provider1",
-      uid: "uid1",
-      name: "bobby",
-      token: "1234",
-      secret: "abigsecret",
-      profile_image: "https://avatars2.githubusercontent.com/u/174825?v=3&s=400"
-    )
+    create_current_user
   end
 
   def create_more_users
@@ -88,7 +81,7 @@ feature "Prevent Users from editing other users questions" do
     sign_in_as user
     click_link("What is the proper way to cook Chicken breasts?")
     click_link("Best Answer")
-    
+
     expect(page).to have_content("You can only choose a best answer for questions you've created.")
   end
 end
