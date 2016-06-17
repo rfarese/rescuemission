@@ -27,7 +27,7 @@ feature "A user answers a question" do
 
   scenario "User must be answering the question on the questions detail page" do
     sign_in_and_go_to_question_detail_page
-    
+
     expect(page).to have_content "I wasn't sure if I should defrost the chicken first or not. If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not."
     expect(page).to have_content "Add an Answer:"
     expect(page).to have_button "Create Answer"

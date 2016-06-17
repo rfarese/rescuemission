@@ -67,6 +67,6 @@ feature "Prevent Users from deleting other users questions" do
     click_link("What is the proper way to cook Chicken breasts?")
     click_link("Delete Question")
 
-    expect(page).to have_content("You can only delete a question you've created.")
+    expect(page).to have_content("You can only use delete for questions you've created.")
   end
 end

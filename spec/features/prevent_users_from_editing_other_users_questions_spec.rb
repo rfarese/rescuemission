@@ -88,7 +88,7 @@ feature "Prevent Users from editing other users questions" do
     click_button("Save Question")
 
     expect(page).to have_content("Signed in as bobby")
-    expect(page).to have_content("You can only edit your own questions.")
+    expect(page).to have_content("You can only use edit for questions you've created.")
     expect(page).to_not have_content("What is the best way to cook Chicken breasts?")
   end
 end

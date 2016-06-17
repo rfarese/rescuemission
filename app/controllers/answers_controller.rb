@@ -1,45 +1,44 @@
 class AnswersController < ApplicationController
-  def create
-    question_id = params[:question_id]
-    @question = Question.find(question_id)
+  def find_question
+    Question.find(params[:question_id])
+  end
 
-    if !current_user
-      flash[:notice] = "You must be signed in to create a new question"
-    else
-      @answer = @question.answers.create(question_id: question_id, user_id: current_user.id, description: answer_params["description"])
+  def create
+    @question = find_question
+
+    user_not_signed_in_notice("create a new answer", question_path(@question))
+
+    if current_user
+      @answer = @question.answers.create(question_id: @question.id, user_id: current_user.id, description: answer_params["description"])
       if !@answer.valid?
         flash[:notice] = "An Answer must be atleast 50 characters long.  Try again."
       end
+      redirect_to question_path(@question)
     end
+  end
 
-    redirect_to question_path(question_id)
+  def best_answers_to_false(answers)
+    answers.each do |answer|
+      answer.best_answer = false
+      answer.save
+    end
   end
 
   def change_current_best_answer(question_id)
-    if Answer.where(question_id: question_id, best_answer: true)
-      answers = Answer.where(question_id: question_id, best_answer: true)
+    answers = Answer.where(question_id: question_id, best_answer: true)
 
-      answers.each do |answer|
-        answer.best_answer = false
-        answer.save
-      end
-    end
+    best_answers_to_false(answers) if answers
   end
 
   def update
-    @question = Question.find(params[:question_id])
+    @question = find_question
 
-    if !current_user
-      flash[:notice] = "You must be signed in to choose a best answer."
-      redirect_to @question
-    elsif current_user.id != @question.user_id
-      flash[:notice] = "You can only choose a best answer for questions you've created."
-      redirect_to @question
-    else
-      change_current_best_answer(params[:question_id])
+    user_not_signed_in_notice("choose a best answer", @question)
+    not_your_question_notice("choose a best answer", @question) if current_user
 
-      answer_id = params[:id]
-      answer = Answer.where(id: answer_id).first
+    if current_user && current_user.id == @question.user_id
+      change_current_best_answer(@question.id)
+      answer = Answer.where(id: params[:id]).first
       answer.best_answer = true
 
       if answer.save
@@ -52,7 +51,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    @question = Question.find(params[:question_id])
+    @question = find_question
     @answer = @question.answers.find(params[:id])
     @answer.destroy
 
