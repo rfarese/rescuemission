@@ -23,7 +23,7 @@ feature "A user can use markdown" do
 
     fill_in("Title", with: "This entire description for this question should be emphasized so that we can see that markdown is working")
     fill_in("Description", with: "*This description doesn't really mean much.  Its just a space filler to ensure that the markdown is working for users that are creating a new question.  I hope it works!*")
-    click_button("Save Question")
+    click_button("Create Question")
 
     expect(page).to have_css("p em", text: "This description doesn't")
   end
@@ -34,7 +34,7 @@ feature "A user can use markdown" do
 
     fill_in("Title", with: "What is the proper way to cook Chicken breasts?")
     fill_in("Description", with: "*I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.*")
-    click_button("Save Question")
+    click_button("Update Question")
 
     expect(page).to have_css("p em", text: "I wasn't sure")
   end

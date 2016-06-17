@@ -26,9 +26,9 @@ feature "A user edits a question" do
 
     fill_in("Title", with: "What is a chicken?")
     fill_in("Description", with: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
-    click_button("Save Question")
+    click_button("Update Question")
 
-    expect(page).to have_content "1 error prohibited this question from being saved:"
+    expect(page).to have_content "1 error stopped this question from being saved:"
     expect(page).to have_content "Title is too short (minimum is 40 characters)"
   end
 
@@ -37,9 +37,9 @@ feature "A user edits a question" do
 
     fill_in("Title", with: "What is the proper way to cook Chicken breasts?")
     fill_in("Description", with: "Should I use any spices?")
-    click_button("Save Question")
+    click_button("Update Question")
 
-    expect(page).to have_content "1 error prohibited this question from being saved:"
+    expect(page).to have_content "1 error stopped this question from being saved:"
     expect(page).to have_content "Description is too short (minimum is 150 characters)"
   end
 
@@ -48,7 +48,7 @@ feature "A user edits a question" do
 
     fill_in("Title", with: "What is the best way to cook Chicken breasts?")
     fill_in("Description", with: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
-    click_button("Save Question")
+    click_button("Update Question")
 
     expect(page).to have_content "What is the best way to cook Chicken breasts?"
     expect(page).to have_content "Answers"

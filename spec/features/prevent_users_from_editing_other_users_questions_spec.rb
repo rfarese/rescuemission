@@ -27,7 +27,7 @@ feature "Prevent Users from editing other users questions" do
     click_link("Edit Question")
 
     fill_in("Title", with: "What is the best way to cook Chicken breasts?")
-    click_button("Save Question")
+    click_button("Update Question")
 
     expect(page).to have_content("You must be signed in to edit a question")
     expect(page).to_not have_content("What is the best way to cook Chicken breasts?")
@@ -37,7 +37,7 @@ feature "Prevent Users from editing other users questions" do
     sign_in_and_navigate_to_edit_question_page("What is the proper way to cook Chicken breasts?")
 
     fill_in("Title", with: "What is the best way to cook Chicken breasts?")
-    click_button("Save Question")
+    click_button("Update Question")
 
     expect(page).to have_content("Signed in as bobby")
     expect(page).to have_content("What is the best way to cook Chicken breasts?")
@@ -47,7 +47,7 @@ feature "Prevent Users from editing other users questions" do
     sign_in_and_navigate_to_edit_question_page("What is the best way for me to get to Thomas Land?")
 
     fill_in("Title", with: "What is the proper way for me to get to Thomas Land?")
-    click_button("Save Question")
+    click_button("Update Question")
 
     expect(page).to have_content("Signed in as bobby")
     expect(page).to have_content("You can only use edit for questions you've created.")

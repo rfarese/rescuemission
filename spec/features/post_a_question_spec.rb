@@ -24,7 +24,7 @@ feature "A user creates a new question" do
 
     fill_in("Title", with: "What is the proper way to cook Chicken breasts?")
     fill_in("Description", with: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
-    click_button("Save Question")
+    click_button("Create Question")
 
     expect(page).to have_content "You Successfully Created Your New Question!"
   end
@@ -34,7 +34,7 @@ feature "A user creates a new question" do
     click_link "Create a New Question"
     fill_in("Title", with: "What is the proper way to cook Chicken breasts?")
     fill_in("Description", with: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
-    click_button("Save Question")
+    click_button("Create Question")
 
     expect(page).to have_content "You must be signed in to create a new question"
   end
@@ -44,7 +44,7 @@ feature "A user creates a new question" do
 
     fill_in("Title", with: "What is a chicken?")
     fill_in("Description", with: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
-    click_button("Save Question")
+    click_button("Create Question")
 
     expect(page).to have_content "1 error stopped this question from being saved:"
     expect(page).to have_content "Title is too short (minimum is 40 characters)"
@@ -55,7 +55,7 @@ feature "A user creates a new question" do
 
     fill_in("Title", with: "What is the proper way to cook Chicken breasts?")
     fill_in("Description", with: "Should I use any spices?")
-    click_button("Save Question")
+    click_button("Create Question")
 
     expect(page).to have_content "1 error stopped this question from being saved:"
     expect(page).to have_content "Description is too short (minimum is 150 characters)"
@@ -66,7 +66,7 @@ feature "A user creates a new question" do
 
     fill_in("Title", with: "What is a chicken?")
     fill_in("Description", with: "Should I use any spices?")
-    click_button("Save Question")
+    click_button("Create Question")
 
     expect(page).to have_content "2 errors stopped this question from being saved:"
     expect(page).to have_content "Title is too short (minimum is 40 characters)"

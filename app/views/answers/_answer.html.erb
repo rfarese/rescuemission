@@ -1,0 +1,20 @@
+<% if Answer.where(question_id: @question.id, best_answer: true).first %>
+  <h3>Best Answer</h3>
+  <% best_answer = Answer.where(question_id: @question.id, best_answer: true).first %>
+    <p class="best-answer"><%= best_answer.description %></p>
+<% end %>
+
+  <table>
+    <tr>
+      <th>Set New Best Answer</th>
+      <th>Answer</th>
+    </tr>
+    <% @question.answers.each do |answer| %>
+      <% unless answer.best_answer == true %>
+        <tr id="<%= dom_id(answer) %>">
+          <td><%= link_to "Best Answer", "/questions/#{answer.question_id}/answers/#{answer.id}", method: :patch %></td>
+          <td><%= use_markdown(answer.description) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
