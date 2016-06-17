@@ -5,12 +5,6 @@ feature "User can choose a best answer" do
     create_current_user
   end
 
-  def create_questions
-    Question.create(user_id: user.id,
-                    title: "What is the proper way to cook Chicken breasts?",
-                    description: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
-  end
-
   def get_question_id
     question = Question.all.first
     question.id
@@ -25,7 +19,7 @@ feature "User can choose a best answer" do
   end
 
   def navigate_to_question_details_page
-    create_questions
+    create_current_user_question
     create_answers
     visit "/"
     sign_in_as user

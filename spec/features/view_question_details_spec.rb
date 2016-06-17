@@ -14,7 +14,7 @@ feature "View a questions details" do
                     description: "Because I am not even 2 yrs old yet, my older brother is a lot stronger than I am and is always taking my toys.  Is there any way I can stop his seeminly unstoppable toy confiscating abilities?")
   end
 
-  scenario "User views the title of each question" do
+  scenario "User views the title and description of each question" do
     create_questions
     visit "/"
     click_link("What is the proper way to cook Chicken breasts?")

@@ -5,12 +5,6 @@ feature "A user can use markdown" do
     create_current_user
   end
 
-  def create_question
-    Question.create(user_id: user.id,
-                    title: "What is the proper way to cook Chicken breasts?",
-                    description: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
-  end
-
   def navigate_to_new_question_page
       visit "/"
       sign_in_as user
@@ -18,7 +12,7 @@ feature "A user can use markdown" do
   end
 
   def navigate_to_question_details_page
-    create_question
+    create_current_user_question
     visit "/"
     sign_in_as user
     click_link "What is the proper way to cook Chicken breasts?"

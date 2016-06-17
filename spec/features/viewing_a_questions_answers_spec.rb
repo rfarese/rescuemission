@@ -5,12 +5,6 @@ feature "A user views a questions answers" do
     create_current_user
   end
 
-  def create_question
-    Question.create(user_id: 1,
-                    title: "What is the proper way to cook Chicken breasts?",
-                    description: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
-  end
-
   def get_question_id
     question = Question.all.first
     question.id
@@ -22,7 +16,7 @@ feature "A user views a questions answers" do
   end
 
   def navigate_to_question_detail_page
-      create_question
+      create_current_user_question
       create_answers
       visit "/"
       click_link "What is the proper way to cook Chicken breasts?"
