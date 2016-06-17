@@ -3,6 +3,7 @@ require_relative 'support/authentication_helper'
 require_relative 'support/database_cleaner'
 require_relative 'support/user_creator_helper'
 require_relative 'support/question_creator_helper'
+require_relative 'support/answer_creator_helper'
 require 'omniauth'
 
 RSpec.configure do |config|
@@ -22,4 +23,5 @@ RSpec.configure do |config|
   config.include AuthenticationHelper
   config.include UserCreatorHelper
   config.include QuestionCreatorHelper
+  config.include AnswerCreatorHelper
 end
