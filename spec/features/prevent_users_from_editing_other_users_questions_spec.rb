@@ -5,17 +5,6 @@ feature "Prevent Users from editing other users questions" do
     create_current_user
   end
 
-  def create_second_user
-    User.create(
-      provider: 'twitter',
-      uid: "165243",
-      name: "Trey Farese",
-      token: "15432",
-      secret: "treysecret",
-      profile_image: "http://img1.jurko.net/Godfather-Avatar2.gif"
-    )
-  end
-
   def get_second_user_id
     second_user = User.where(name: "Trey Farese").last
     second_user.id

@@ -5,17 +5,6 @@ feature "Prevent Users from deleting other users questions" do
     create_current_user
   end
 
-  def create_second_user
-    User.create(
-      provider: 'twitter',
-      uid: "165243",
-      name: "Trey Farese",
-      token: "15432",
-      secret: "treysecret",
-      profile_image: "http://img1.jurko.net/Godfather-Avatar2.gif"
-    )
-  end
-
   def get_user_id(name)
     User.where(name: name).first.id
   end

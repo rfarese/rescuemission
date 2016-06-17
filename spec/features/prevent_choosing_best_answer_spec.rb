@@ -6,23 +6,8 @@ feature "Prevent Users from editing other users questions" do
   end
 
   def create_more_users
-    User.create(
-      provider: 'twitter',
-      uid: "165243",
-      name: "Trey Farese",
-      token: "15432",
-      secret: "treysecret",
-      profile_image: "http://img1.jurko.net/Godfather-Avatar2.gif"
-    )
-
-    User.create(
-      provider: 'twitter',
-      uid: "342561",
-      name: "Declan Farese",
-      token: "23451",
-      secret: "declansecret",
-      profile_image: "http://img1.jurko.net/avatar_8755.jpg"
-    )
+    create_second_user
+    create_third_user
   end
 
   def get_user_id(name)
