@@ -1,9 +1,5 @@
 require 'capybara/rspec'
-require_relative 'support/authentication_helper'
-require_relative 'support/database_cleaner'
-require_relative 'support/user_creator_helper'
-require_relative 'support/question_creator_helper'
-require_relative 'support/answer_creator_helper'
+Dir[File.dirname(__FILE__) + '/support/*.rb'].each {|file| require file }
 require 'omniauth'
 
 RSpec.configure do |config|
