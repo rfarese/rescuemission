@@ -1,8 +1,19 @@
 require 'rails_helper'
 
-feature "View all questions" do
+feature "User can choose a best answer" do
+  let(:user) do
+    User.create(
+      provider: "Provider1",
+      uid: "uid1",
+      name: "bobby",
+      token: "1234",
+      secret: "abigsecret",
+      profile_image: "https://avatars2.githubusercontent.com/u/174825?v=3&s=400"
+    )
+  end
+
   def create_questions
-    Question.create(user_id: 1,
+    Question.create(user_id: user.id,
                     title: "What is the proper way to cook Chicken breasts?",
                     description: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
   end
@@ -24,6 +35,7 @@ feature "View all questions" do
     create_questions
     create_answers
     visit "/"
+    sign_in_as user
     click_link("What is the proper way to cook Chicken breasts?")
   end
 
