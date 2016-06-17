@@ -29,16 +29,26 @@ class AnswersController < ApplicationController
 
   def update
     @question = Question.find(params[:question_id])
-    change_current_best_answer(params[:question_id])
 
-    answer_id = params[:id]
-    answer = Answer.where(id: answer_id).first
-    answer.best_answer = true
-
-    if answer.save
+    if session[:user_id] == nil
+      flash[:notice] = "You must be signed in to choose a best answer."
+      redirect_to @question
+    elsif session[:user_id] != @question.user_id
+      flash[:notice] = "You can only choose a best answer for questions you've created."
       redirect_to @question
     else
-      render 'edit'
+      change_current_best_answer(params[:question_id])
+
+      answer_id = params[:id]
+      answer = Answer.where(id: answer_id).first
+      answer.best_answer = true
+
+      if answer.save
+        flash[:notice] = "You've added a new best answer!"
+        redirect_to @question
+      else
+        render 'edit'
+      end
     end
   end
 
