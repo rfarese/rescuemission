@@ -10,12 +10,12 @@ feature "Prevent Users from editing other users questions" do
     create_second_user_question
   end
 
-  def sign_in_and_navigate_to_edit_question_page
+  def sign_in_and_navigate_to_edit_question_page(question_link)
     create_second_user
     create_questions
     visit '/'
     sign_in_as user
-    click_link("What is the proper way to cook Chicken breasts?")
+    click_link(question_link)
     click_link("Edit Question")
   end
 
@@ -34,12 +34,7 @@ feature "Prevent Users from editing other users questions" do
   end
 
   scenario "A signed in user successfully edits thier own question" do
-    create_second_user
-    create_questions
-    visit '/'
-    sign_in_as user
-    click_link("What is the proper way to cook Chicken breasts?")
-    click_link("Edit Question")
+    sign_in_and_navigate_to_edit_question_page("What is the proper way to cook Chicken breasts?")
 
     fill_in("Title", with: "What is the best way to cook Chicken breasts?")
     click_button("Save Question")
@@ -49,12 +44,7 @@ feature "Prevent Users from editing other users questions" do
   end
 
   scenario "A signed in user can not edit someone elses question" do
-    create_second_user
-    create_questions
-    visit '/'
-    sign_in_as user
-    click_link("What is the best way for me to get to Thomas Land?")
-    click_link("Edit Question")
+    sign_in_and_navigate_to_edit_question_page("What is the best way for me to get to Thomas Land?")
 
     fill_in("Title", with: "What is the proper way for me to get to Thomas Land?")
     click_button("Save Question")

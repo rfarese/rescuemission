@@ -10,6 +10,13 @@ feature "Prevent Users from deleting other users questions" do
     create_second_user_question
   end
 
+  def navigate_to_home_page_and_sign_in
+    create_second_user
+    create_questions
+    visit '/'
+    sign_in_as user
+  end
+
   scenario "A user must be signed in to delete a question" do
     create_second_user
     create_questions
@@ -22,10 +29,8 @@ feature "Prevent Users from deleting other users questions" do
   end
 
   scenario "A signed in user successfully deletes thier own question" do
-    create_second_user
-    create_questions
-    visit '/'
-    sign_in_as user
+    navigate_to_home_page_and_sign_in
+
     click_link("What is the proper way to cook Chicken breasts?")
     click_link("Delete Question")
 
@@ -33,10 +38,8 @@ feature "Prevent Users from deleting other users questions" do
   end
 
   scenario "A signed in user can not delete someone elses question" do
-    create_second_user
-    create_questions
-    visit '/'
-    sign_in_as user
+    navigate_to_home_page_and_sign_in
+    
     click_link("What is the best way for me to get to Thomas Land?")
     click_link("Delete Question")
 

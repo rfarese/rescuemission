@@ -20,6 +20,14 @@ feature "Prevent Users from editing other users questions" do
     third_user_answers_second_users_question
   end
 
+  def navigate_to_home_page_and_sign_in
+    create_more_users
+    create_questions
+    create_answers
+    visit '/'
+    sign_in_as user
+  end
+
   scenario "A user must be signed in to choose a best answer" do
     create_more_users
     create_questions
@@ -32,11 +40,8 @@ feature "Prevent Users from editing other users questions" do
   end
 
   scenario "A signed in user successfully edits thier own question" do
-    create_more_users
-    create_questions
-    create_answers
-    visit '/'
-    sign_in_as user
+    navigate_to_home_page_and_sign_in
+
     click_link("What is the proper way to cook Chicken breasts?")
     click_link("Best Answer")
 
@@ -44,11 +49,8 @@ feature "Prevent Users from editing other users questions" do
   end
 
   scenario "A signed in user can not choose a best answer for someone elses question" do
-    create_more_users
-    create_questions
-    create_answers
-    visit '/'
-    sign_in_as user
+    navigate_to_home_page_and_sign_in
+    
     click_link("What is the best way for me to get to Thomas Land?")
     click_link("Best Answer")
 
