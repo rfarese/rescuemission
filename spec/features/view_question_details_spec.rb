@@ -1,17 +1,12 @@
 require 'rails_helper'
 
 feature "View a questions details" do
+  let(:user) do
+    create_current_user
+  end
 
   def create_questions
-    Question.create(user_id: 1,
-                    title: "What is the proper way to cook Chicken breasts?",
-                    description: "I wasn't sure if I should defrost the chicken first or not.  If I should cook it in a pan on the stove or in a glass dish in the oven. Or if I should use any spices or not.")
-    Question.create(user_id: 2,
-                    title: "What is the best way for me to get to Thomas Land?",
-                    description: "Trying to get to Thomas Land when you are only 3 yrs old can be tough.  Should I ask my parents to drive me?  Or perhaps my grandpa?  Am I too hung to try and hitch hike there?")
-    Question.create(user_id: 3,
-                    title: "How do I get my older brother to stop taking all my toys all the time?",
-                    description: "Because I am not even 2 yrs old yet, my older brother is a lot stronger than I am and is always taking my toys.  Is there any way I can stop his seeminly unstoppable toy confiscating abilities?")
+    create_current_user_question
   end
 
   scenario "User views the title and description of each question" do
