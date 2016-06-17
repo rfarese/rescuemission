@@ -19,7 +19,7 @@
     </tr>
     <% @question.answers.each do |answer| %>
       <% unless answer.best_answer == true %>
-        <tr>
+        <tr id="<%= dom_id(answer) %>">
           <td><%= link_to "Best Answer", "/questions/#{answer.question_id}/answers/#{answer.id}", method: :patch %></td>
           <td><%= use_markdown(answer.description) %></td>
         </tr>
