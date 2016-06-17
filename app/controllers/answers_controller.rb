@@ -24,7 +24,7 @@ class AnswersController < ApplicationController
     end
   end
 
-  def change_current_best_answer(question_id)
+  def switch_best_answer_to_false(question_id)
     answers = Answer.where(question_id: question_id, best_answer: true)
 
     best_answers_to_false(answers) if answers
@@ -37,15 +37,13 @@ class AnswersController < ApplicationController
     not_your_question_notice("choose a best answer", @question) if current_user
 
     if current_user && current_user.id == @question.user_id
-      change_current_best_answer(@question.id)
+      switch_best_answer_to_false(@question.id)
       answer = Answer.where(id: params[:id]).first
       answer.best_answer = true
 
       if answer.save
         flash[:notice] = "You've added a new best answer!"
         redirect_to @question
-      else
-        render 'edit'
       end
     end
   end
