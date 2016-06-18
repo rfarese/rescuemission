@@ -51,6 +51,6 @@ feature "A user edits a question" do
     click_button("Update Question")
 
     expect(page).to have_content "What is the best way to cook Chicken breasts?"
-    expect(page).to have_content "Answers"
+    expect(page).to have_content "Your question has been updated."
   end
 end

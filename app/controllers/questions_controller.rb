@@ -42,6 +42,8 @@ class QuestionsController < ApplicationController
 
     if current_user && current_user.id == @question.user_id
       if @question.update(question_params)
+        flash[:notice] = "Your question has been updated."
+
         redirect_to @question
       else
         render 'edit'
