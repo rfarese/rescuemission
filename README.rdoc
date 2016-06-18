@@ -3,7 +3,7 @@
 Hi there!  This is the first web application I've built using Ruby on Rails!
 
 Essentially, its a site similar in the basic functionality as a site like
-Stackoverflow where a user can create a question and other users can answer it.
+Stack Overflow where a user can create a question and other users can answer it.
 
 The basic features are:
   - Simple user authentication through Twitter
