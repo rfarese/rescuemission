@@ -1,28 +1,54 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Hi there!  This is the first web application I've built using Ruby on Rails!
 
-Things you may want to cover:
+Essentially, its a site similar in the basic functionality as a site like
+Stackoverflow where a user can create a question and other users can answer it.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+The basic features are:
+  - Simple user authentication through Twitter
+  - Creating a question
+  - Editing a question
+  - Deleting a question
+  - Viewing a question
+  - Viewing a list of questions
+  - Creating an answer to a question
+  - Choosing a "Best Answer" to a question
+  - Descriptions for Questions and Answers support markdown
+  - Basic validations (questions and answers must be certain lengths to be valid)
+  - Basic preventions
+    - Users can only edit or delete their own questions
+    - Users can only choose a best answer for an answer they have created
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Some Basic Technical Details
+
+* Ruby version - the site is running Ruby 2.2.3
+
+* System dependencies - view the Gemfile for the system dependencies.
+  In addition to some standard dependencies installed by Rails, I've also included
+  omniauth-twitter for Twitter authentication, redcarpet for supporting markdown,
+  and the pg Gem for running PostgreSQL.  In my development and test environments,
+  I've included rspec-rails, capybara, database_cleaner, and launchy for debugging
+  and testing.
+
+* Configuration - alterations to the configurations settings include the addition
+  of the /config/initializers/omniauth.rb to set the provider for OmniAuth, separate
+  databases for development, testing, and production, and of course, the different
+  configurations of routes for the application
+
+* Database - see Schema.rb for a full description of the different tables
+  in the database which include a user, question, and answer table.
+
+* Test Suite - there is a separate database for our rspec/capybara feature tests.
+  We are using database_cleaner to clear the database before each test scenario runs.
+  There are a series of different support files in /spec/support directory that
+  assist with creating different users, questions, and answers.  Note that the when
+  testing, while database cleaner will remove data from the database after each scenario,
+  the id's for each record created will continue to increment.  Which is why you must
+  dynamically create the id's for the majority of new records.
+
+* Deployment instructions - if you have all the necessary requirements in your development
+  environment to run a rails application, you should just be able to run 'rails s' or
+  'rails server' in your commandline, then go to the regular Rails local URL
+  which is localhost:3000
